@@ -182,18 +182,19 @@
 <p><strong>体素级</strong>（Voxel-Level） 是指在三维空间中对数据进行处理和分析的最小单位，类似于二维图像中的像素（Pixel），但在三维空间中称为体素（Voxel）。<strong>体素是三维图像的基本单元</strong>，是一个立方体单元，包含位置信息和强度值（灰度、颜色等），通常用于医学影像分析、计算机视觉、三维重建等领域。<strong>体素的大小决定了三维图像的分辨率，体素越小，分辨率越高。</strong></p>
 <h3 id="Dice"><a href="#Dice" class="headerlink" title="Dice"></a>Dice</h3><p><em>This concept appeared at Experiments.</em></p>
 <p><strong>Dice</strong>是一种常用的评估指标，广泛应用于图像分割、目标检测等任务中，用于衡量预测结果与真实标签之间的相似性。<strong>Dice 系数</strong>（Dice Coefficient）和 <strong>Dice 损失</strong>（Dice Loss） 是深度学习中常用的工具。</p>
-<h4 id="Dice-coefficient"><a href="#Dice-coefficient" class="headerlink" title="Dice coefficient"></a>Dice coefficient</h4><p>$$<br>Dice &#x3D; \frac{2 \times |A \cap B|}{|A| + |B|}<br>$$</p>
-<ul>
+<h4 id="Dice-coefficient"><a href="#Dice-coefficient" class="headerlink" title="Dice coefficient"></a>Dice coefficient</h4><script type="math/tex; mode=display">
+Dice = \frac{2 \times |A \cap B|}{|A| + |B|}</script><ul>
 <li>$A$ 是预测结果， $B$ 是真实标签。</li>
 <li>$|A \cap B|$ 是预测结果与真实标签的交集。</li>
 <li>$|A|$ 和 $|B|$ 分别是预测结果和真实标签的大小。</li>
 <li>Dice值范围为[0,1]，1表示完全匹配，0表示完全不匹配。</li>
 </ul>
-<h4 id="Dice-loss"><a href="#Dice-loss" class="headerlink" title="Dice loss"></a>Dice loss</h4><p>$$<br>Dice loss &#x3D; 1 - \frac{2 \times |A \cap B| + \epsilon}{|A| + |B| + \epsilon}<br>$$</p>
-<ul>
+<h4 id="Dice-loss"><a href="#Dice-loss" class="headerlink" title="Dice loss"></a>Dice loss</h4><script type="math/tex; mode=display">
+Dice loss = 1 - \frac{2 \times |A \cap B| + \epsilon}{|A| + |B| + \epsilon}</script><ul>
 <li>Dice loss是基于Dice的损失函数。</li>
 <li>$\epsilon$ 是小常数，避免分母为0。</li>
-<li>用概率值代替二进制值，可以得到适用于深度学习模型的变体<strong>Soft Dice Loss</strong>：<br>$$<br>Soft;Dice;Loss &#x3D; 1 - \frac{2:\Sigma^N_{i&#x3D;1}p_iy_i + \epsilon}{\Sigma^N_{i&#x3D;1}p_i + \Sigma^N_{i&#x3D;1}y_i + \epsilon}<br>$$</li>
+<li>用概率值代替二进制值，可以得到适用于深度学习模型的变体<strong>Soft Dice Loss</strong>：<script type="math/tex; mode=display">
+Soft\;Dice\;Loss = 1 - \frac{2\:\Sigma^N_{i=1}p_iy_i + \epsilon}{\Sigma^N_{i=1}p_i + \Sigma^N_{i=1}y_i + \epsilon}</script></li>
 <li><strong>优点：</strong> Dice损失对类别不平衡问题具有<strong>鲁棒性</strong>，且能直接优化重叠区域，适合分割任务。<br><em>鲁棒性：系统、算法或模型在面对异常输入、噪声、干扰或参数变化时，仍能保持稳定性和有效性的能力。</em></li>
 <li><strong>缺点：</strong> Dice损失<strong>对边界区域的敏感性较低</strong>，在极端情况下（如预测结果和真实标签都为空），可能导致数值不稳定。</li>
 </ul>
